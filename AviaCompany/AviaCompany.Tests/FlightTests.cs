@@ -3,8 +3,14 @@ using AviaCompany.Domain.Data;
 
 namespace AviaCompany.Tests;
 
+/// <summary>
+/// Набор тестов для проверки аналитических запросов авиакомпании
+/// </summary>
 public class FlightTests(DataSeeder data) : IClassFixture<DataSeeder>
 {
+    /// <summary>
+    /// Проверяет, что рейсы с минимальной длительностью корректно определяются
+    /// </summary>
     [Fact]
     public void GetFlightsWithMinimalDuration_ReturnsExpectedFlights()
     {
@@ -14,6 +20,9 @@ public class FlightTests(DataSeeder data) : IClassFixture<DataSeeder>
         Assert.Contains(shortestFlights, f => f.FlightDuration == minDuration);
     }
 
+    /// <summary>
+    /// Проверяет, что топ-5 авиарейсов по количеству пассажиров определяются корректно
+    /// </summary>
     [Fact]
     public void GetTop5FlightsByPassengerCount_ReturnsFiveFlights()
     {
@@ -22,9 +31,12 @@ public class FlightTests(DataSeeder data) : IClassFixture<DataSeeder>
         Assert.NotEmpty(topFlights);
         Assert.True(topFlights.Count <= 5);
         var isOrdered = topFlights.SequenceEqual(topFlights.OrderByDescending(x => x.PassengerCount));
-        Assert.True(isOrdered, "����� ������ ���� ������������� �� �������� ���������� ����������");
+        Assert.True(isOrdered, "Рейсы должны быть отсортированы по убыванию количества пассажиров");
     }
 
+    /// <summary>
+    /// Проверяет, что пассажиры без багажа корректно определяются для выбранных рейсов
+    /// </summary>
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
@@ -37,9 +49,12 @@ public class FlightTests(DataSeeder data) : IClassFixture<DataSeeder>
             .Select(t => data.Passengers.First(p => p.Id == t.PassengerId)).OrderBy(p => p.FullName).ToList();
         Assert.NotNull(passengers);
         var isOrdered = passengers.SequenceEqual(passengers.OrderBy(p => p.FullName));
-        Assert.True(isOrdered, "��������� ������ ���� ������������� �� ���");
+        Assert.True(isOrdered, "Пассажиры должны быть отсортированы по ФИО");
     }
 
+    /// <summary>
+    /// Проверяет, что полеты выбранной модели за указанный период времени корректно определяются
+    /// </summary>
     [Fact]
     public void GetFlightsByModelAndPeriod_ReturnsCorrectFlights()
     {
@@ -55,11 +70,14 @@ public class FlightTests(DataSeeder data) : IClassFixture<DataSeeder>
         }
     }
 
+    /// <summary>
+    /// Проверяет, что рейсы из заданного пункта отправления в пункт прибытия корректно определяются
+    /// </summary>
     [Fact]
     public void GetFlightsByRoute_ReturnsExpectedFlights()
     {
-        var departureCity = "������";
-        var arrivalCity = "�����-���������";
+        var departureCity = "Москва";
+        var arrivalCity = "Санкт-Петербург";
         var flights = data.Flights.Where(f => f.DepartureCity == departureCity && f.ArrivalCity == arrivalCity)
             .OrderBy(f => f.DepartureDate).ToList();
         Assert.NotEmpty(flights);
@@ -69,9 +87,12 @@ public class FlightTests(DataSeeder data) : IClassFixture<DataSeeder>
             Assert.Equal(arrivalCity, flight.ArrivalCity);
         }
         var isOrdered = flights.SequenceEqual(flights.OrderBy(f => f.DepartureDate));
-        Assert.True(isOrdered, "����� ������ ���� ������������� �� ���� �����������");
+        Assert.True(isOrdered, "Рейсы должны быть отсортированы по дате отправления");
     }
 
+    /// <summary>
+    /// Проверяет, что тестовые данные загружены корректно
+    /// </summary>
     [Fact]
     public void FixtureContainsTestData()
     {
