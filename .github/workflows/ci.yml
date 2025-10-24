@@ -20,10 +20,10 @@ jobs:
         dotnet-version: 8.0.x
         
     - name: Restore dependencies
-      run: dotnet restore AviaCompany.sln
+      run: dotnet restore ./AviaCompany.sln
       
     - name: Build
-      run: dotnet build AviaCompany.sln --no-restore --configuration Release
+      run: dotnet build ./AviaCompany.sln --no-restore --configuration Release
       
     - name: Run tests
-      run: dotnet test AviaCompany.sln --no-build --verbosity normal --configuration Release
+      run: dotnet test ./AviaCompany.Tests/AviaCompany.Tests.csproj --no-build --verbosity normal --configuration Release
