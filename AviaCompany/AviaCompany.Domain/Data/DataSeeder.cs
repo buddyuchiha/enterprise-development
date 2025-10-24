@@ -9,12 +9,9 @@ namespace AviaCompany.Domain.Data;
 /// <summary>
 /// Класс для первичного наполнения коллекций данными
 /// </summary>
-/// <remarks>
-/// Данные сгенерированы для тестирования функциональности авиакомпании
-/// </remarks>
-public static class DataSeeder
+public class DataSeeder
 {
-    public static readonly List<AircraftFamily> AircraftFamilies = [
+    public readonly List<AircraftFamily> AircraftFamilies = [
         new AircraftFamily
         {
             Id = 1,
@@ -77,7 +74,7 @@ public static class DataSeeder
         }
     ];
 
-    public static readonly List<AircraftModel> AircraftModels = [
+    public readonly List<AircraftModel> AircraftModels = [
         new AircraftModel
         {
             Id = 1,
@@ -167,55 +164,10 @@ public static class DataSeeder
             Range = 3400,
             PassengerCapacity = 90,
             CargoCapacity = 15000
-        },
-        new AircraftModel
-        {
-            Id = 11,
-            Name = "A330-300",
-            FamilyId = 6,
-            Range = 10800,
-            PassengerCapacity = 440,
-            CargoCapacity = 70000
-        },
-        new AircraftModel
-        {
-            Id = 12,
-            Name = "777-300ER",
-            FamilyId = 7,
-            Range = 13650,
-            PassengerCapacity = 550,
-            CargoCapacity = 75000
-        },
-        new AircraftModel
-        {
-            Id = 13,
-            Name = "A350-900",
-            FamilyId = 8,
-            Range = 15000,
-            PassengerCapacity = 440,
-            CargoCapacity = 68000
-        },
-        new AircraftModel
-        {
-            Id = 14,
-            Name = "787-9 Dreamliner",
-            FamilyId = 9,
-            Range = 14140,
-            PassengerCapacity = 420,
-            CargoCapacity = 65000
-        },
-        new AircraftModel
-        {
-            Id = 15,
-            Name = "Embraer 195",
-            FamilyId = 10,
-            Range = 4260,
-            PassengerCapacity = 132,
-            CargoCapacity = 16000
         }
     ];
 
-    public static readonly List<Flight> Flights = [
+    public readonly List<Flight> Flights = [
         new Flight
         {
             Id = 1,
@@ -335,70 +287,10 @@ public static class DataSeeder
             DepartureTime = new TimeSpan(11, 0, 0),
             FlightDuration = new TimeSpan(4, 30, 0),
             AircraftModelId = 7
-        },
-        new Flight
-        {
-            Id = 11,
-            Code = "SU1011",
-            DepartureCity = "Москва",
-            ArrivalCity = "Калининград",
-            DepartureDate = new DateTime(2024, 1, 18),
-            ArrivalDate = new DateTime(2024, 1, 18),
-            DepartureTime = new TimeSpan(13, 0, 0),
-            FlightDuration = new TimeSpan(2, 0, 0),
-            AircraftModelId = 8
-        },
-        new Flight
-        {
-            Id = 12,
-            Code = "SU1012",
-            DepartureCity = "Калининград",
-            ArrivalCity = "Москва",
-            DepartureDate = new DateTime(2024, 1, 18),
-            ArrivalDate = new DateTime(2024, 1, 18),
-            DepartureTime = new TimeSpan(17, 0, 0),
-            FlightDuration = new TimeSpan(2, 0, 0),
-            AircraftModelId = 9
-        },
-        new Flight
-        {
-            Id = 13,
-            Code = "SU1013",
-            DepartureCity = "Москва",
-            ArrivalCity = "Париж",
-            DepartureDate = new DateTime(2024, 1, 19),
-            ArrivalDate = new DateTime(2024, 1, 19),
-            DepartureTime = new TimeSpan(10, 0, 0),
-            FlightDuration = new TimeSpan(4, 0, 0),
-            AircraftModelId = 11
-        },
-        new Flight
-        {
-            Id = 14,
-            Code = "SU1014",
-            DepartureCity = "Москва",
-            ArrivalCity = "Нью-Йорк",
-            DepartureDate = new DateTime(2024, 1, 20),
-            ArrivalDate = new DateTime(2024, 1, 20),
-            DepartureTime = new TimeSpan(14, 0, 0),
-            FlightDuration = new TimeSpan(10, 30, 0),
-            AircraftModelId = 12
-        },
-        new Flight
-        {
-            Id = 15,
-            Code = "SU1015",
-            DepartureCity = "Москва",
-            ArrivalCity = "Токио",
-            DepartureDate = new DateTime(2024, 1, 21),
-            ArrivalDate = new DateTime(2024, 1, 21),
-            DepartureTime = new TimeSpan(16, 0, 0),
-            FlightDuration = new TimeSpan(9, 45, 0),
-            AircraftModelId = 13
         }
     ];
 
-    public static readonly List<Passenger> Passengers = [
+    public readonly List<Passenger> Passengers = [
         new Passenger
         {
             Id = 1,
@@ -468,80 +360,10 @@ public static class DataSeeder
             PassportNumber = "45 10 012345",
             FullName = "Семенов Андрей Николаевич",
             BirthDate = new DateTime(1989, 4, 8)
-        },
-        new Passenger
-        {
-            Id = 11,
-            PassportNumber = "45 11 112233",
-            FullName = "Орлова Татьяна Владимировна",
-            BirthDate = new DateTime(1994, 1, 20)
-        },
-        new Passenger
-        {
-            Id = 12,
-            PassportNumber = "45 12 223344",
-            FullName = "Белов Игорь Александрович",
-            BirthDate = new DateTime(1986, 10, 12)
-        },
-        new Passenger
-        {
-            Id = 13,
-            PassportNumber = "45 13 334455",
-            FullName = "Киселева Надежда Сергеевна",
-            BirthDate = new DateTime(1996, 3, 7)
-        },
-        new Passenger
-        {
-            Id = 14,
-            PassportNumber = "45 14 445566",
-            FullName = "Григорьев Павел Олегович",
-            BirthDate = new DateTime(1984, 8, 28)
-        },
-        new Passenger
-        {
-            Id = 15,
-            PassportNumber = "45 15 556677",
-            FullName = "Титова Юлия Игоревна",
-            BirthDate = new DateTime(1997, 5, 15)
-        },
-        new Passenger
-        {
-            Id = 16,
-            PassportNumber = "45 16 667788",
-            FullName = "Александров Максим Викторович",
-            BirthDate = new DateTime(1982, 7, 8)
-        },
-        new Passenger
-        {
-            Id = 17,
-            PassportNumber = "45 17 778899",
-            FullName = "Васильева Елена Сергеевна",
-            BirthDate = new DateTime(1998, 11, 25)
-        },
-        new Passenger
-        {
-            Id = 18,
-            PassportNumber = "45 18 889900",
-            FullName = "Михайлов Артем Игоревич",
-            BirthDate = new DateTime(1981, 4, 17)
-        },
-        new Passenger
-        {
-            Id = 19,
-            PassportNumber = "45 19 990011",
-            FullName = "Романова Светлана Александровна",
-            BirthDate = new DateTime(1999, 2, 28)
-        },
-        new Passenger
-        {
-            Id = 20,
-            PassportNumber = "45 20 001122",
-            FullName = "Данилов Владислав Олегович",
-            BirthDate = new DateTime(1980, 12, 10)
         }
     ];
 
-    public static readonly List<Ticket> Tickets = [
+    public  readonly List<Ticket> Tickets = [
         new Ticket { Id = 1, FlightId = 1, PassengerId = 1, SeatNumber = "10A", HasHandLuggage = true, LuggageWeight = 15.5m },
         new Ticket { Id = 2, FlightId = 1, PassengerId = 2, SeatNumber = "10B", HasHandLuggage = true, LuggageWeight = 10.0m },
         new Ticket { Id = 3, FlightId = 1, PassengerId = 3, SeatNumber = "11A", HasHandLuggage = false, LuggageWeight = 0m },
@@ -550,40 +372,7 @@ public static class DataSeeder
         new Ticket { Id = 6, FlightId = 1, PassengerId = 6, SeatNumber = "12B", HasHandLuggage = true, LuggageWeight = 12.0m },
         new Ticket { Id = 7, FlightId = 1, PassengerId = 7, SeatNumber = "13A", HasHandLuggage = false, LuggageWeight = 0m },
         new Ticket { Id = 8, FlightId = 1, PassengerId = 8, SeatNumber = "13B", HasHandLuggage = true, LuggageWeight = 9.5m },
-
         new Ticket { Id = 9, FlightId = 2, PassengerId = 9, SeatNumber = "15C", HasHandLuggage = true, LuggageWeight = 20.0m },
         new Ticket { Id = 10, FlightId = 2, PassengerId = 10, SeatNumber = "15D", HasHandLuggage = true, LuggageWeight = 12.5m },
-        new Ticket { Id = 11, FlightId = 2, PassengerId = 11, SeatNumber = "16C", HasHandLuggage = false, LuggageWeight = 0m },
-        new Ticket { Id = 12, FlightId = 2, PassengerId = 12, SeatNumber = "16D", HasHandLuggage = true, LuggageWeight = 0m },
-        new Ticket { Id = 13, FlightId = 2, PassengerId = 13, SeatNumber = "17C", HasHandLuggage = true, LuggageWeight = 18.0m },
-        new Ticket { Id = 14, FlightId = 2, PassengerId = 14, SeatNumber = "17D", HasHandLuggage = true, LuggageWeight = 9.5m },
-        new Ticket { Id = 15, FlightId = 2, PassengerId = 15, SeatNumber = "18C", HasHandLuggage = false, LuggageWeight = 0m },
-        new Ticket { Id = 16, FlightId = 2, PassengerId = 16, SeatNumber = "18D", HasHandLuggage = true, LuggageWeight = 14.0m },
-        new Ticket { Id = 17, FlightId = 2, PassengerId = 17, SeatNumber = "19C", HasHandLuggage = true, LuggageWeight = 11.0m },
-        new Ticket { Id = 18, FlightId = 2, PassengerId = 18, SeatNumber = "19D", HasHandLuggage = false, LuggageWeight = 0m },
-
-        new Ticket { Id = 19, FlightId = 3, PassengerId = 19, SeatNumber = "5A", HasHandLuggage = true, LuggageWeight = 11.0m },
-        new Ticket { Id = 20, FlightId = 3, PassengerId = 20, SeatNumber = "5B", HasHandLuggage = true, LuggageWeight = 0m },
-        new Ticket { Id = 21, FlightId = 3, PassengerId = 1, SeatNumber = "6A", HasHandLuggage = false, LuggageWeight = 0m },
-        new Ticket { Id = 22, FlightId = 3, PassengerId = 3, SeatNumber = "6B", HasHandLuggage = true, LuggageWeight = 16.5m },
-        new Ticket { Id = 23, FlightId = 3, PassengerId = 5, SeatNumber = "7A", HasHandLuggage = true, LuggageWeight = 7.0m },
-        new Ticket { Id = 24, FlightId = 3, PassengerId = 7, SeatNumber = "7B", HasHandLuggage = true, LuggageWeight = 0m },
-        new Ticket { Id = 25, FlightId = 3, PassengerId = 9, SeatNumber = "8A", HasHandLuggage = false, LuggageWeight = 0m },
-
-        new Ticket { Id = 26, FlightId = 4, PassengerId = 2, SeatNumber = "20A", HasHandLuggage = true, LuggageWeight = 13.0m },
-        new Ticket { Id = 27, FlightId = 4, PassengerId = 4, SeatNumber = "20B", HasHandLuggage = true, LuggageWeight = 0m },
-        new Ticket { Id = 28, FlightId = 5, PassengerId = 6, SeatNumber = "25C", HasHandLuggage = true, LuggageWeight = 22.0m },
-        new Ticket { Id = 29, FlightId = 6, PassengerId = 8, SeatNumber = "8A", HasHandLuggage = false, LuggageWeight = 0m },
-        new Ticket { Id = 30, FlightId = 6, PassengerId = 10, SeatNumber = "8B", HasHandLuggage = true, LuggageWeight = 10.5m },
-        new Ticket { Id = 31, FlightId = 7, PassengerId = 12, SeatNumber = "12C", HasHandLuggage = true, LuggageWeight = 0m },
-        new Ticket { Id = 32, FlightId = 8, PassengerId = 14, SeatNumber = "14A", HasHandLuggage = true, LuggageWeight = 15.0m },
-        new Ticket { Id = 33, FlightId = 9, PassengerId = 16, SeatNumber = "9B", HasHandLuggage = false, LuggageWeight = 0m },
-        new Ticket { Id = 34, FlightId = 10, PassengerId = 18, SeatNumber = "11C", HasHandLuggage = true, LuggageWeight = 8.5m },
-        new Ticket { Id = 35, FlightId = 11, PassengerId = 20, SeatNumber = "7D", HasHandLuggage = true, LuggageWeight = 0m },
-        new Ticket { Id = 36, FlightId = 12, PassengerId = 2, SeatNumber = "13A", HasHandLuggage = true, LuggageWeight = 12.0m },
-        new Ticket { Id = 37, FlightId = 13, PassengerId = 4, SeatNumber = "21B", HasHandLuggage = true, LuggageWeight = 25.0m },
-        new Ticket { Id = 38, FlightId = 14, PassengerId = 6, SeatNumber = "35C", HasHandLuggage = true, LuggageWeight = 30.0m },
-        new Ticket { Id = 39, FlightId = 15, PassengerId = 8, SeatNumber = "42A", HasHandLuggage = false, LuggageWeight = 0m },
-        new Ticket { Id = 40, FlightId = 15, PassengerId = 10, SeatNumber = "42B", HasHandLuggage = true, LuggageWeight = 18.5m }
     ];
 }

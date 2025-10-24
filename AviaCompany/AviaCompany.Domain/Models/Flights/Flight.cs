@@ -23,13 +23,13 @@ public class Flight
     /// Пункт отправления
     /// </summary>
     [StringLength(100)]
-    public string? DepartureCity { get; set; }
+    public required string DepartureCity { get; set; }
 
     /// <summary>
     /// Пункт прибытия
     /// </summary>
     [StringLength(100)]
-    public string? ArrivalCity { get; set; }
+    public required string ArrivalCity { get; set; }
 
     /// <summary>
     /// Дата отправления

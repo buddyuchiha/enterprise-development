@@ -17,13 +17,13 @@ public class Passenger
     /// Номер паспорта
     /// </summary>
     [StringLength(20)]
-    public string? PassportNumber { get; set; }
+    public required string PassportNumber { get; set; }
 
     /// <summary>
     /// ФИО
     /// </summary>
     [StringLength(200)]
-    public string? FullName { get; set; }
+    public required string FullName { get; set; }
 
     /// <summary>
     /// Дата рождения

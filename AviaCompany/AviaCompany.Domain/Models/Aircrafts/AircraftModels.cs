@@ -17,7 +17,7 @@ public class AircraftModel
     /// Название модели
     /// </summary>
     [StringLength(100)]
-    public string? Name { get; set; }
+    public required string Name { get; set; }
 
     /// <summary>
     /// Идентификатор семейства
@@ -27,7 +27,7 @@ public class AircraftModel
     /// <summary>
     /// Дальность полета (км)
     /// </summary>
-    public int Range { get; set; }
+    public double Range { get; set; }
 
     /// <summary>
     /// Пассажировместимость
@@ -37,7 +37,5 @@ public class AircraftModel
     /// <summary>
     /// Грузовместимость (кг)
     /// </summary>
-    public int CargoCapacity { get; set; }
-
-    public override string ToString() => Name ?? "<Без названия>";
+    public double CargoCapacity { get; set; }
 }

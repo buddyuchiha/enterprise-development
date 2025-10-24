@@ -17,13 +17,11 @@ public class AircraftFamily
     /// Название семейства
     /// </summary>
     [StringLength(100)]
-    public string? Name { get; set; }
+    public required string Name { get; set; }
 
     /// <summary>
     /// Производитель
     /// </summary>
     [StringLength(100)]
-    public string? Manufacturer { get; set; }
-
-    public override string ToString() => $"{Manufacturer} {Name}";
+    public required string Manufacturer { get; set; }
 }
