@@ -34,22 +34,22 @@ public class Flight
     /// <summary>
     /// Дата отправления
     /// </summary>
-    public DateTime DepartureDate { get; set; }
+    public DateTime? DepartureDate { get; set; }
 
     /// <summary>
     /// Дата прибытия
     /// </summary>
-    public DateTime ArrivalDate { get; set; }
+    public DateTime? ArrivalDate { get; set; }
 
     /// <summary>
     /// Время отправления
     /// </summary>
-    public TimeSpan DepartureTime { get; set; }
+    public TimeSpan? DepartureTime { get; set; }
 
     /// <summary>
     /// Время в пути
     /// </summary>
-    public TimeSpan FlightDuration { get; set; }
+    public TimeSpan? FlightDuration { get; set; }
 
     /// <summary>
     /// Идентификатор модели самолета

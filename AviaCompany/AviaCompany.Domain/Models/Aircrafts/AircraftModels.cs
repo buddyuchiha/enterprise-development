@@ -27,15 +27,15 @@ public class AircraftModel
     /// <summary>
     /// Дальность полета (км)
     /// </summary>
-    public double Range { get; set; }
+    public required double Range { get; set; }
 
     /// <summary>
     /// Пассажировместимость
     /// </summary>
-    public int PassengerCapacity { get; set; }
+    public required int PassengerCapacity { get; set; }
 
     /// <summary>
     /// Грузовместимость (кг)
     /// </summary>
-    public double CargoCapacity { get; set; }
+    public required double CargoCapacity { get; set; }
 }

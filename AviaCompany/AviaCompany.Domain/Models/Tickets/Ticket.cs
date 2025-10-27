@@ -27,17 +27,17 @@ public class Ticket
     /// Номер места
     /// </summary>
     [StringLength(10)]
-    public string? SeatNumber { get; set; }
+    public required string SeatNumber { get; set; }
 
     /// <summary>
     /// Наличие ручной клади
     /// </summary>
-    public bool HasHandLuggage { get; set; }
+    public bool? HasHandLuggage { get; set; }
 
     /// <summary>
     /// Вес багажа (кг)
     /// </summary>
-    public decimal LuggageWeight { get; set; }
+    public decimal? LuggageWeight { get; set; }
 
     public override string ToString() => $"Билет {Id}";
 }

@@ -28,7 +28,7 @@ public class Passenger
     /// <summary>
     /// Дата рождения
     /// </summary>
-    public DateTime BirthDate { get; set; }
+    public DateTime? BirthDate { get; set; }
 
     public override string ToString() => $"{FullName} ({PassportNumber})";
 }

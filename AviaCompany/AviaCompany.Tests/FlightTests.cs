@@ -62,12 +62,10 @@ public class FlightTests(DataSeeder data) : IClassFixture<DataSeeder>
         var startDate = new DateTime(2024, 1, 1);
         var endDate = new DateTime(2024, 1, 31);
         var flights = data.Flights.Where(f => f.AircraftModelId == model.Id && f.DepartureDate >= startDate && f.DepartureDate <= endDate).ToList();
+
         Assert.NotEmpty(flights);
-        foreach (var flight in flights)
-        {
-            Assert.Equal(model.Id, flight.AircraftModelId);
-            Assert.True(flight.DepartureDate >= startDate && flight.DepartureDate <= endDate);
-        }
+        Assert.All(flights, flight => Assert.Equal(model.Id, flight.AircraftModelId));
+        Assert.All(flights, flight => Assert.True(flight.DepartureDate >= startDate && flight.DepartureDate <= endDate));
     }
 
     /// <summary>
@@ -81,11 +79,8 @@ public class FlightTests(DataSeeder data) : IClassFixture<DataSeeder>
         var flights = data.Flights.Where(f => f.DepartureCity == departureCity && f.ArrivalCity == arrivalCity)
             .OrderBy(f => f.DepartureDate).ToList();
         Assert.NotEmpty(flights);
-        foreach (var flight in flights)
-        {
-            Assert.Equal(departureCity, flight.DepartureCity);
-            Assert.Equal(arrivalCity, flight.ArrivalCity);
-        }
+        Assert.All(flights, flight => Assert.Equal(departureCity, flight.DepartureCity));
+        Assert.All(flights, flight => Assert.Equal(arrivalCity, flight.ArrivalCity));
         var isOrdered = flights.SequenceEqual(flights.OrderBy(f => f.DepartureDate));
         Assert.True(isOrdered, "Рейсы должны быть отсортированы по дате отправления");
     }

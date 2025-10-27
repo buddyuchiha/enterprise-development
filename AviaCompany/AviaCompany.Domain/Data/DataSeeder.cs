@@ -11,7 +11,10 @@ namespace AviaCompany.Domain.Data;
 /// </summary>
 public class DataSeeder
 {
-    public readonly List<AircraftFamily> AircraftFamilies = [
+    /// <summary>
+    /// Коллекция семейств самолетов
+    /// </summary>
+    public List<AircraftFamily> AircraftFamilies { get; } = [
         new AircraftFamily
         {
             Id = 1,
@@ -74,7 +77,10 @@ public class DataSeeder
         }
     ];
 
-    public readonly List<AircraftModel> AircraftModels = [
+    /// <summary>
+    /// Коллекция моделей самолетов
+    /// </summary>
+    public List<AircraftModel> AircraftModels { get; } = [
         new AircraftModel
         {
             Id = 1,
@@ -167,7 +173,10 @@ public class DataSeeder
         }
     ];
 
-    public readonly List<Flight> Flights = [
+    /// <summary>
+    /// Коллекция рейсов
+    /// </summary>
+    public List<Flight> Flights { get; } = [
         new Flight
         {
             Id = 1,
@@ -290,7 +299,10 @@ public class DataSeeder
         }
     ];
 
-    public readonly List<Passenger> Passengers = [
+    /// <summary>
+    /// Коллекция пассажиров
+    /// </summary>
+    public List<Passenger> Passengers { get; } = [
         new Passenger
         {
             Id = 1,
@@ -363,7 +375,10 @@ public class DataSeeder
         }
     ];
 
-    public  readonly List<Ticket> Tickets = [
+    /// <summary>
+    /// Коллекция билетов
+    /// </summary>
+    public List<Ticket> Tickets { get; } = [
         new Ticket { Id = 1, FlightId = 1, PassengerId = 1, SeatNumber = "10A", HasHandLuggage = true, LuggageWeight = 15.5m },
         new Ticket { Id = 2, FlightId = 1, PassengerId = 2, SeatNumber = "10B", HasHandLuggage = true, LuggageWeight = 10.0m },
         new Ticket { Id = 3, FlightId = 1, PassengerId = 3, SeatNumber = "11A", HasHandLuggage = false, LuggageWeight = 0m },
