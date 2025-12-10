@@ -18,13 +18,13 @@ public interface IFlightService : IApplicationService<FlightDto, FlightCreateUpd
     /// </summary>
     /// <param name="count">Количество рейсов для возврата (по умолчанию — 5)</param>
     /// <returns>Список DTO рейсов, отсортированных по убыванию числа пассажиров</returns>
-    Task<List<FlightDto>> GetTopFlightsByPassengerCountAsync(int count = 5);
+    public Task<List<FlightDto>> GetTopFlightsByPassengerCountAsync(int count = 5);
 
     /// <summary>
     /// Получает все авиарейсы с минимальным временем в пути
     /// </summary>
     /// <returns>Список DTO рейсов с наименьшим временем полёта</returns>
-    Task<List<FlightDto>> GetFlightsWithShortestDurationAsync();
+    public Task<List<FlightDto>> GetFlightsWithShortestDurationAsync();
 
     /// <summary>
     /// Получает все авиарейсы по указанному маршруту
@@ -32,5 +32,5 @@ public interface IFlightService : IApplicationService<FlightDto, FlightCreateUpd
     /// <param name="departureCity">Город отправления</param>
     /// <param name="arrivalCity">Город прибытия</param>
     /// <returns>Список DTO рейсов по маршруту</returns>
-    Task<List<FlightDto>> GetFlightsByRouteAsync(string departureCity, string arrivalCity);
+    public Task<List<FlightDto>> GetFlightsByRouteAsync(string departureCity, string arrivalCity);
 }

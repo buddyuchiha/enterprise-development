@@ -11,11 +11,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="AircraftFamily\" />
-    <Folder Include="AircraftModel\" />
-    <Folder Include="Passenger\" />
-    <Folder Include="Ticket\" />
-  </ItemGroup>
-
 </Project>
