@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AviaCompany.Domain.Models.Tickets;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AviaCompany.Domain.Models.Passengers;
 
@@ -29,6 +31,11 @@ public class Passenger
     /// Дата рождения
     /// </summary>
     public DateTime? BirthDate { get; set; }
+
+    /// <summary>
+    /// Билеты пассажира (навигационное свойство)
+    /// </summary>
+    public virtual List<Ticket>? Tickets { get; set; }
 
     public override string ToString() => $"{FullName} ({PassportNumber})";
 }

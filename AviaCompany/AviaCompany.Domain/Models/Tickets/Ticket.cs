@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AviaCompany.Domain.Models.Flights;
+using AviaCompany.Domain.Models.Passengers;
 
 namespace AviaCompany.Domain.Models.Tickets;
 
@@ -19,9 +21,19 @@ public class Ticket
     public required int FlightId { get; set; }
 
     /// <summary>
+    /// Рейс (навигационное свойство)
+    /// </summary>
+    public virtual Flight? Flight { get; set; }
+
+    /// <summary>
     /// Идентификатор пассажира
     /// </summary>
     public required int PassengerId { get; set; }
+
+    /// <summary>
+    /// Пассажир (навигационное свойство)
+    /// </summary>
+    public virtual Passenger? Passenger { get; set; }
 
     /// <summary>
     /// Номер места

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AviaCompany.Domain.Models.Aircrafts;
+using AviaCompany.Domain.Models.Tickets;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AviaCompany.Domain.Models.Flights;
 
@@ -55,6 +58,16 @@ public class Flight
     /// Идентификатор модели самолета
     /// </summary>
     public required int AircraftModelId { get; set; }
+
+    /// <summary>
+    /// Модель самолета (навигационное свойство)
+    /// </summary>
+    public virtual AircraftModel? AircraftModel { get; set; }
+
+    /// <summary>
+    /// Билеты на рейс (навигационное свойство)
+    /// </summary>
+    public virtual List<Ticket>? Tickets { get; set; }
 
     public override string ToString() => $"{Code}: {DepartureCity} -> {ArrivalCity}";
 }

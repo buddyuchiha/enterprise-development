@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AviaCompany.Domain.Models.Flights;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AviaCompany.Domain.Models.Aircrafts;
 
@@ -25,6 +27,11 @@ public class AircraftModel
     public required int FamilyId { get; set; }
 
     /// <summary>
+    /// Семейство самолета (навигационное свойство)
+    /// </summary>
+    public virtual AircraftFamily? Family { get; set; }
+
+    /// <summary>
     /// Дальность полета (км)
     /// </summary>
     public required double Range { get; set; }
@@ -38,4 +45,9 @@ public class AircraftModel
     /// Грузовместимость (кг)
     /// </summary>
     public required double CargoCapacity { get; set; }
+
+    /// <summary>
+    /// Рейсы этой модели (навигационное свойство)
+    /// </summary>
+    public virtual List<Flight>? Flights { get; set; }
 }
