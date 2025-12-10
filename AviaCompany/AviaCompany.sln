@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.WebApi", "AviaC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.AppHost", "AviaCompany.AppHost\AviaCompany.AppHost.csproj", "{CCBFEBE3-172A-4850-833F-51795457D4DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.ServiceDefaults", "AviaCompany.ServiceDefaults\AviaCompany.ServiceDefaults.csproj", "{6909352E-A210-4DC9-9778-9A60C462F2F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{CCBFEBE3-172A-4850-833F-51795457D4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBFEBE3-172A-4850-833F-51795457D4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBFEBE3-172A-4850-833F-51795457D4DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6909352E-A210-4DC9-9778-9A60C462F2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6909352E-A210-4DC9-9778-9A60C462F2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6909352E-A210-4DC9-9778-9A60C462F2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6909352E-A210-4DC9-9778-9A60C462F2F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

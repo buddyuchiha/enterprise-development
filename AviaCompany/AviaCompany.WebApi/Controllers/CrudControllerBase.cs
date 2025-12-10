@@ -69,7 +69,7 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto, TKey>
     /// </summary>
     [HttpDelete("{id}")]
     [ProducesResponseType(200)]
-    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
     [ProducesResponseType(500)]
     public async Task<IActionResult> Delete(TKey id)
     {
@@ -78,7 +78,7 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto, TKey>
         {
             var result = await appService.Delete(id);
             logger.LogInformation("{method} завершился успешно", nameof(Delete));
-            return result ? Ok() : NoContent();
+            return result ? Ok() : NotFound();
         }
         catch (Exception ex)
         {
@@ -114,7 +114,7 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto, TKey>
     /// </summary>
     [HttpGet("{id}")]
     [ProducesResponseType(200)]
-    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
     [ProducesResponseType(500)]
     public async Task<ActionResult<TDto>> Get(TKey id)
     {
@@ -123,7 +123,7 @@ public abstract class CrudControllerBase<TDto, TCreateUpdateDto, TKey>
         {
             var result = await appService.Get(id);
             logger.LogInformation("{method} завершился успешно", nameof(Get));
-            return result != null ? Ok(result) : NoContent();
+            return result != null ? Ok(result) : NotFound();
         }
         catch (Exception ex)
         {

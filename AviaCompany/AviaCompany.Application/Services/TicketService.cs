@@ -45,12 +45,24 @@ public class TicketService : ITicketService
 
     public async Task<IList<TicketDto>> GetTicketsByFlightAsync(int flightId)
     {
-        throw new NotImplementedException();
+        var allTickets = await _repository.ReadAll();
+        var flightTickets = allTickets
+            .Where(t => t.FlightId == flightId)
+            .OrderBy(t => t.SeatNumber)
+            .ToList();
+
+        return _mapper.Map<IList<TicketDto>>(flightTickets);
     }
 
     public async Task<IList<TicketDto>> GetTicketsByPassengerAsync(int passengerId)
     {
-        throw new NotImplementedException();
+        var allTickets = await _repository.ReadAll();
+        var passengerTickets = allTickets
+            .Where(t => t.PassengerId == passengerId)
+            .OrderBy(t => t.Id) 
+            .ToList();
+
+        return _mapper.Map<IList<TicketDto>>(passengerTickets);
     }
 
     public async Task<TicketDto> Update(TicketCreateUpdateDto dto, int dtoId)

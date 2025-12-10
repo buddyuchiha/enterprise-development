@@ -3,57 +3,57 @@ using AviaCompany.Application.Contracts.Passenger;
 using AviaCompany.Application.Contracts.Ticket;
 using AviaCompany.Domain;
 using AviaCompany.Domain.Models.Passengers;
+using AviaCompany.Domain.Models.Tickets;
 
 namespace AviaCompany.Application.Services;
 
 /// <summary>
 /// Сервис для работы с пассажирами
 /// </summary>
-public class PassengerService : IPassengerService
+public class PassengerService(IRepository<Passenger, int> repository, IRepository<Ticket, int> ticketRepository, IMapper mapper) : IPassengerService
 {
-    private readonly IRepository<Passenger, int> _repository;
-    private readonly IMapper _mapper;
-
-    public PassengerService(IRepository<Passenger, int> repository, IMapper mapper)
-    {
-        _repository = repository;
-        _mapper = mapper;
-    }
-
     public async Task<PassengerDto> Create(PassengerCreateUpdateDto dto)
     {
-        var passenger = _mapper.Map<Passenger>(dto);
-        var result = await _repository.Create(passenger);
-        return _mapper.Map<PassengerDto>(result);
+        var passenger = mapper.Map<Passenger>(dto);
+        var result = await repository.Create(passenger);
+        return mapper.Map<PassengerDto>(result);
     }
 
     public async Task<bool> Delete(int dtoId)
     {
-        return await _repository.Delete(dtoId);
+        return await repository.Delete(dtoId);
     }
 
     public async Task<PassengerDto?> Get(int dtoId)
     {
-        var passenger = await _repository.Read(dtoId);
-        return passenger != null ? _mapper.Map<PassengerDto>(passenger) : null;
+        var passenger = await repository.Read(dtoId);
+        return passenger != null ? mapper.Map<PassengerDto>(passenger) : null;
     }
 
     public async Task<IList<PassengerDto>> GetAll()
     {
-        var passengers = await _repository.ReadAll();
-        return _mapper.Map<IList<PassengerDto>>(passengers);
+        var passengers = await repository.ReadAll();
+        return mapper.Map<IList<PassengerDto>>(passengers);
     }
 
     public async Task<IList<TicketDto>> GetPassengerTicketsAsync(int passengerId)
     {
-        throw new NotImplementedException();
+        var allTickets = await ticketRepository.ReadAll();
+
+        var passengerTickets = allTickets
+            .Where(ticket => ticket.PassengerId == passengerId)
+            .OrderBy(ticket => ticket.FlightId)        
+            .ThenBy(ticket => ticket.SeatNumber)       
+            .ToList();
+
+        return mapper.Map<IList<TicketDto>>(passengerTickets);
     }
 
     public async Task<PassengerDto> Update(PassengerCreateUpdateDto dto, int dtoId)
     {
-        var passenger = _mapper.Map<Passenger>(dto);
+        var passenger = mapper.Map<Passenger>(dto);
         passenger.Id = dtoId;
-        var result = await _repository.Update(passenger);
-        return _mapper.Map<PassengerDto>(result);
+        var result = await repository.Update(passenger);
+        return mapper.Map<PassengerDto>(result);
     }
 }
