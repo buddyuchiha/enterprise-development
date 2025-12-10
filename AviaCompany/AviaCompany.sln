@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36616.10 d17.14
+VisualStudioVersion = 17.14.36616.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Domain", "AviaCompany.Domain\AviaCompany.Domain.csproj", "{286D9444-7E66-4076-93A4-156460C1B73D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Tests", "AviaCompany.Tests\AviaCompany.Tests.csproj", "{99FC1A1F-A9C0-4706-A6C5-3039AD096197}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Application.Contracts", "AviaCompany.Application.Contracts\AviaCompany.Application.Contracts.csproj", "{37E82F9E-7520-4CED-B66D-B402CD74B71D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Application", "AviaCompany.Application\AviaCompany.Application.csproj", "{162FAAE1-37DC-4A42-A98C-19BEDECEF2E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Infrastructure.EfCore", "AviaCompany.Infrastructure.EfCore\AviaCompany.Infrastructure.EfCore.csproj", "{20F1C744-AB30-42E7-914D-62C242725DD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{99FC1A1F-A9C0-4706-A6C5-3039AD096197}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99FC1A1F-A9C0-4706-A6C5-3039AD096197}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99FC1A1F-A9C0-4706-A6C5-3039AD096197}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37E82F9E-7520-4CED-B66D-B402CD74B71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37E82F9E-7520-4CED-B66D-B402CD74B71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37E82F9E-7520-4CED-B66D-B402CD74B71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37E82F9E-7520-4CED-B66D-B402CD74B71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162FAAE1-37DC-4A42-A98C-19BEDECEF2E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162FAAE1-37DC-4A42-A98C-19BEDECEF2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162FAAE1-37DC-4A42-A98C-19BEDECEF2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162FAAE1-37DC-4A42-A98C-19BEDECEF2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20F1C744-AB30-42E7-914D-62C242725DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20F1C744-AB30-42E7-914D-62C242725DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20F1C744-AB30-42E7-914D-62C242725DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20F1C744-AB30-42E7-914D-62C242725DD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
