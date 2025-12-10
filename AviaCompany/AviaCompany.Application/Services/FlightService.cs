@@ -59,6 +59,11 @@ public class FlightService : IFlightService
         throw new NotImplementedException();
     }
 
+    public async Task<List<FlightDto>> GetFlightsByModelAndPeriodAsync(int modelId, DateTime from, DateTime to)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<FlightDto> Update(FlightCreateUpdateDto dto, int dtoId)
     {
         var flight = _mapper.Map<Flight>(dto);

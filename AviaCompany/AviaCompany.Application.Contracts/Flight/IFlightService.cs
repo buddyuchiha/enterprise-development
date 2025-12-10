@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AviaCompany.Application.Contracts;
+﻿using AviaCompany.Application.Contracts;
 
 namespace AviaCompany.Application.Contracts.Flight;
 
@@ -33,4 +27,13 @@ public interface IFlightService : IApplicationService<FlightDto, FlightCreateUpd
     /// <param name="arrivalCity">Город прибытия</param>
     /// <returns>Список DTO рейсов по маршруту</returns>
     public Task<List<FlightDto>> GetFlightsByRouteAsync(string departureCity, string arrivalCity);
+
+    /// <summary>
+    /// Возвращает все авиарейсы, выполняемые на указанной модели воздушного судна в заданный временной период.
+    /// </summary>
+    /// <param name="modelId">Идентификатор модели самолёта.</param>
+    /// <param name="from">Начало периода (включительно, по дате вылета).</param>
+    /// <param name="to">Конец периода (включительно, по дате прилёта).</param>
+    /// <returns>Список DTO рейсов, соответствующих указанным критериям.</returns>
+    public Task<List<FlightDto>> GetFlightsByModelAndPeriodAsync(int modelId, DateTime from, DateTime to);
 }
