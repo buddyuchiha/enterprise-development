@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Infrastructure.EfCore", "AviaCompany.Infrastructure.EfCore\AviaCompany.Infrastructure.EfCore.csproj", "{20F1C744-AB30-42E7-914D-62C242725DD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.WebApi", "AviaCompany.WebApi\AviaCompany.WebApi.csproj", "{2E8ADC85-1C68-41CB-9815-821CAAB6D4E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.AppHost", "AviaCompany.AppHost\AviaCompany.AppHost.csproj", "{CCBFEBE3-172A-4850-833F-51795457D4DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{20F1C744-AB30-42E7-914D-62C242725DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20F1C744-AB30-42E7-914D-62C242725DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20F1C744-AB30-42E7-914D-62C242725DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E8ADC85-1C68-41CB-9815-821CAAB6D4E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E8ADC85-1C68-41CB-9815-821CAAB6D4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E8ADC85-1C68-41CB-9815-821CAAB6D4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E8ADC85-1C68-41CB-9815-821CAAB6D4E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCBFEBE3-172A-4850-833F-51795457D4DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCBFEBE3-172A-4850-833F-51795457D4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCBFEBE3-172A-4850-833F-51795457D4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCBFEBE3-172A-4850-833F-51795457D4DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

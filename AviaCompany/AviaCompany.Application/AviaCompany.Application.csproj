@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AviaCompany.Application.Contracts\AviaCompany.Application.Contracts.csproj" />
+    <ProjectReference Include="..\AviaCompany.Domain\AviaCompany.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
