@@ -52,7 +52,6 @@ public class AviaCompanyDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Семейство самолетов
         modelBuilder.Entity<AircraftFamily>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -62,7 +61,6 @@ public class AviaCompanyDbContext : DbContext
                   .OnDelete(DeleteBehavior.Cascade);
         });
 
-        // Модель самолета
         modelBuilder.Entity<AircraftModel>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -77,7 +75,6 @@ public class AviaCompanyDbContext : DbContext
                   .OnDelete(DeleteBehavior.Restrict);
         });
 
-        // Рейс
         modelBuilder.Entity<Flight>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -92,7 +89,6 @@ public class AviaCompanyDbContext : DbContext
                   .OnDelete(DeleteBehavior.Cascade);
         });
 
-        // Пассажир
         modelBuilder.Entity<Passenger>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -102,7 +98,6 @@ public class AviaCompanyDbContext : DbContext
                   .OnDelete(DeleteBehavior.Cascade);
         });
 
-        // Билет
         modelBuilder.Entity<Ticket>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -117,7 +112,6 @@ public class AviaCompanyDbContext : DbContext
                   .OnDelete(DeleteBehavior.Restrict);
         });
 
-        // Заполнение начальными данными
         var seeder = new DataSeeder();
 
         modelBuilder.Entity<AircraftFamily>().HasData(seeder.AircraftFamilies);

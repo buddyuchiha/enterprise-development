@@ -1,7 +1,7 @@
 ﻿using AviaCompany.Application.Contracts.Flight;
+using AviaCompany.Application.Contracts.Passenger;
 using AviaCompany.Application.Contracts.Ticket;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace AviaCompany.WebApi.Controllers;
 
@@ -13,6 +13,7 @@ namespace AviaCompany.WebApi.Controllers;
 public class FlightController(
     IFlightService flightService,
     ITicketService ticketService,
+    IPassengerService passengerService,
     ILogger<FlightController> logger) : CrudControllerBase<FlightDto, FlightCreateUpdateDto, int>(flightService, logger)
 {
 
@@ -23,7 +24,7 @@ public class FlightController(
     /// <returns>Список рейсов</returns>
     [HttpGet("top-by-passengers")]
     [ProducesResponseType(200)]
-    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
     [ProducesResponseType(500)]
     public async Task<ActionResult<List<FlightDto>>> GetTopFlightsByPassengerCount(int count = 5)
     {
@@ -42,7 +43,7 @@ public class FlightController(
                 nameof(GetTopFlightsByPassengerCount),
                 result.Count);
 
-            return result.Count > 0 ? Ok(result) : NoContent();
+            return result.Count > 0 ? Ok(result) : NotFound();
         }
         catch (Exception ex)
         {
@@ -61,7 +62,7 @@ public class FlightController(
     /// <returns>Список рейсов</returns>
     [HttpGet("shortest-duration")]
     [ProducesResponseType(200)]
-    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
     [ProducesResponseType(500)]
     public async Task<ActionResult<List<FlightDto>>> GetFlightsWithShortestDuration()
     {
@@ -79,7 +80,7 @@ public class FlightController(
                 nameof(GetFlightsWithShortestDuration),
                 result.Count);
 
-            return result.Count > 0 ? Ok(result) : NoContent();
+            return result.Count > 0 ? Ok(result) : NotFound();
         }
         catch (Exception ex)
         {
@@ -100,8 +101,7 @@ public class FlightController(
     /// <returns>Список рейсов</returns>
     [HttpGet("by-route")]
     [ProducesResponseType(200)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
     [ProducesResponseType(500)]
     public async Task<ActionResult<List<FlightDto>>> GetFlightsByRoute(
         [FromQuery] string departureCity,
@@ -114,12 +114,6 @@ public class FlightController(
             departureCity,
             arrivalCity);
 
-        if (string.IsNullOrWhiteSpace(departureCity) || string.IsNullOrWhiteSpace(arrivalCity))
-        {
-            logger.LogWarning("Не указан город отправления или прибытия");
-            return BadRequest("Необходимо указать города отправления и прибытия");
-        }
-
         try
         {
             var result = await flightService.GetFlightsByRouteAsync(departureCity, arrivalCity);
@@ -129,7 +123,7 @@ public class FlightController(
                 nameof(GetFlightsByRoute),
                 result.Count);
 
-            return result.Count > 0 ? Ok(result) : NoContent();
+            return result.Count > 0 ? Ok(result) : NotFound();
         }
         catch (Exception ex)
         {
@@ -151,8 +145,7 @@ public class FlightController(
     /// <returns>Список рейсов</returns>
     [HttpGet("by-model-period/{modelId}")]
     [ProducesResponseType(200)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
     [ProducesResponseType(500)]
     public async Task<ActionResult<List<FlightDto>>> GetFlightsByModelAndPeriod(
         int modelId,
@@ -167,12 +160,6 @@ public class FlightController(
             from,
             to);
 
-        if (from > to)
-        {
-            logger.LogWarning("Дата начала периода {From} позже даты окончания {To}", from, to);
-            return BadRequest("Дата начала периода не может быть позже даты окончания");
-        }
-
         try
         {
             var result = await flightService.GetFlightsByModelAndPeriodAsync(modelId, from, to);
@@ -182,7 +169,7 @@ public class FlightController(
                 nameof(GetFlightsByModelAndPeriod),
                 result.Count);
 
-            return result.Count > 0 ? Ok(result) : NoContent();
+            return result.Count > 0 ? Ok(result) : NotFound();
         }
         catch (Exception ex)
         {
@@ -216,5 +203,28 @@ public class FlightController(
 
         var tickets = await ticketService.GetTicketsByFlightAsync(flightId);
         return tickets.Count > 0 ? Ok(tickets) : NotFound();
+    }
+
+    /// <summary>
+    /// Получить билеты пассажиров без багажа
+    /// </summary>
+    /// <param name="flightId">ID рейса</param>
+    /// <returns>Список билетов</returns>
+    [HttpGet("{flightId}/passengers-without-baggage")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(500)]
+    public async Task<ActionResult<IList<PassengerDto>>> GetPassengersWithoutBaggage(int flightId)
+    {
+        try
+        {
+            var passengers = await passengerService.GetPassengersWithoutBaggageAsync(flightId);
+            return passengers.Count > 0 ? Ok(passengers) : NotFound();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Ошибка при получении пассажиров без багажа для рейса {FlightId}", flightId);
+            return StatusCode(500, "Внутренняя ошибка сервера");
+        }
     }
 }

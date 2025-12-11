@@ -1,6 +1,4 @@
-﻿using AviaCompany.Application.Contracts;
-
-namespace AviaCompany.Application.Contracts.Flight;
+﻿namespace AviaCompany.Application.Contracts.Flight;
 
 /// <summary>
 /// Сервис для работы с авиарейсами (CRUD + аналитика)

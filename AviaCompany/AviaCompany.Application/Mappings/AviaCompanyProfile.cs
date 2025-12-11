@@ -18,23 +18,18 @@ public class AviaCompanyProfile : Profile
 {
     public AviaCompanyProfile()
     {
-        // AircraftFamily
         CreateMap<AircraftFamily, AircraftFamilyDto>();
         CreateMap<AircraftFamilyCreateUpdateDto, AircraftFamily>();
 
-        // AircraftModel
         CreateMap<AircraftModel, AircraftModelDto>();
         CreateMap<AircraftModelCreateUpdateDto, AircraftModel>();
 
-        // Flight
         CreateMap<Flight, FlightDto>();
         CreateMap<FlightCreateUpdateDto, Flight>();
 
-        // Passenger
         CreateMap<Passenger, PassengerDto>();
         CreateMap<PassengerCreateUpdateDto, Passenger>();
 
-        // Ticket
         CreateMap<Ticket, TicketDto>();
         CreateMap<TicketCreateUpdateDto, Ticket>();
     }

@@ -1,4 +1,3 @@
-using AutoMapper;
 using AviaCompany.Application.Contracts;
 using AviaCompany.Application.Contracts.AircraftFamily;
 using AviaCompany.Application.Contracts.AircraftModel;
