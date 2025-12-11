@@ -1,5 +1,5 @@
-﻿using AviaCompany.Domain.Data;
-using AviaCompany.Domain.Models;
+﻿using System.Text;
+using AviaCompany.Domain.Data;
 using AviaCompany.Domain.Models.Aircrafts;
 using AviaCompany.Domain.Models.Flights;
 using AviaCompany.Domain.Models.Passengers;
@@ -52,9 +52,38 @@ public class AviaCompanyDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        foreach (var entity in modelBuilder.Model.GetEntityTypes())
+        {
+            entity.SetTableName(ToSnakeCase(entity.GetTableName()));
+
+            foreach (var property in entity.GetProperties())
+            {
+                property.SetColumnName(ToSnakeCase(property.Name));
+            }
+
+            foreach (var foreignKey in entity.GetForeignKeys())
+            {
+                var tableName = ToSnakeCase(entity.GetTableName());
+                var principalTableName = ToSnakeCase(foreignKey.PrincipalEntityType.GetTableName());
+                var columnName = ToSnakeCase(foreignKey.Properties.First().Name);
+
+                foreignKey.SetConstraintName($"fk_{tableName}_{columnName}_{principalTableName}");
+            }
+
+            foreach (var index in entity.GetIndexes())
+            {
+                var tableName = ToSnakeCase(entity.GetTableName());
+                var columns = string.Join("_", index.Properties.Select(p => ToSnakeCase(p.Name)));
+                index.SetDatabaseName($"ix_{tableName}_{columns}");
+            }
+        }
+
         modelBuilder.Entity<AircraftFamily>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Manufacturer).IsRequired().HasMaxLength(100);
+
             entity.HasMany(e => e.Models)
                   .WithOne(m => m.Family)
                   .HasForeignKey(m => m.FamilyId)
@@ -64,6 +93,11 @@ public class AviaCompanyDbContext : DbContext
         modelBuilder.Entity<AircraftModel>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Range).IsRequired();
+            entity.Property(e => e.PassengerCapacity).IsRequired();
+            entity.Property(e => e.CargoCapacity).IsRequired();
+
             entity.HasOne(e => e.Family)
                   .WithMany(f => f.Models)
                   .HasForeignKey(e => e.FamilyId)
@@ -78,6 +112,14 @@ public class AviaCompanyDbContext : DbContext
         modelBuilder.Entity<Flight>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Code).IsRequired().HasMaxLength(10);
+            entity.Property(e => e.DepartureCity).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.ArrivalCity).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.DepartureDate).IsRequired();
+            entity.Property(e => e.ArrivalDate).IsRequired();
+            entity.Property(e => e.DepartureTime).IsRequired();
+            entity.Property(e => e.FlightDuration).IsRequired();
+
             entity.HasOne(e => e.AircraftModel)
                   .WithMany(m => m.Flights)
                   .HasForeignKey(e => e.AircraftModelId)
@@ -92,6 +134,12 @@ public class AviaCompanyDbContext : DbContext
         modelBuilder.Entity<Passenger>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.PassportNumber).IsRequired().HasMaxLength(20);
+            entity.Property(e => e.FullName).IsRequired().HasMaxLength(150);
+            entity.Property(e => e.BirthDate).IsRequired();
+
+            entity.HasIndex(e => e.PassportNumber).IsUnique();
+
             entity.HasMany(e => e.Tickets)
                   .WithOne(t => t.Passenger)
                   .HasForeignKey(t => t.PassengerId)
@@ -101,6 +149,10 @@ public class AviaCompanyDbContext : DbContext
         modelBuilder.Entity<Ticket>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.SeatNumber).IsRequired().HasMaxLength(5);
+            entity.Property(e => e.HasHandLuggage).IsRequired();
+            entity.Property(e => e.LuggageWeight).HasPrecision(10, 2);
+
             entity.HasOne(e => e.Flight)
                   .WithMany(f => f.Tickets)
                   .HasForeignKey(e => e.FlightId)
@@ -119,5 +171,29 @@ public class AviaCompanyDbContext : DbContext
         modelBuilder.Entity<Flight>().HasData(seeder.Flights);
         modelBuilder.Entity<Passenger>().HasData(seeder.Passengers);
         modelBuilder.Entity<Ticket>().HasData(seeder.Tickets);
+    }
+
+    private static string ToSnakeCase(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+            return input;
+
+        var result = new StringBuilder();
+        result.Append(char.ToLower(input[0]));
+
+        for (var i = 1; i < input.Length; i++)
+        {
+            if (char.IsUpper(input[i]))
+            {
+                result.Append('_');
+                result.Append(char.ToLower(input[i]));
+            }
+            else
+            {
+                result.Append(input[i]);
+            }
+        }
+
+        return result.ToString();
     }
 }
