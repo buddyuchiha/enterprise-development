@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.ServiceDefaults
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Generator", "AviaCompany.Generator\AviaCompany.Generator.csproj", "{719C4F57-49B1-8AE3-20C7-DA9DAB8F163C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.GrpcContracts", "AviaCompany.GrpcContracts\AviaCompany.GrpcContracts.csproj", "{DC2CAB9D-73B8-4D1B-A386-53928CDD596D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{719C4F57-49B1-8AE3-20C7-DA9DAB8F163C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719C4F57-49B1-8AE3-20C7-DA9DAB8F163C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719C4F57-49B1-8AE3-20C7-DA9DAB8F163C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC2CAB9D-73B8-4D1B-A386-53928CDD596D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC2CAB9D-73B8-4D1B-A386-53928CDD596D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC2CAB9D-73B8-4D1B-A386-53928CDD596D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC2CAB9D-73B8-4D1B-A386-53928CDD596D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
