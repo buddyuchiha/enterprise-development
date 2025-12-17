@@ -14,9 +14,12 @@ using AviaCompany.Domain.Models.Tickets;
 using AviaCompany.Infrastructure.EfCore;
 using AviaCompany.Infrastructure.EfCore.Repositories;
 using AviaCompany.ServiceDefaults;
+using AviaCompany.WebApi.GrpcServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -69,10 +72,13 @@ builder.Services.AddScoped<IRepository<AircraftModel, int>, AircraftModelEfCoreR
 builder.Services.AddScoped<IRepository<Passenger, int>, PassengerEfCoreRepository>();
 builder.Services.AddScoped<IRepository<Ticket, int>, TicketEfCoreRepository>();
 
+builder.Services.AddHostedService<TicketConsumerService>();
+
 builder.AddMySqlDbContext<AviaCompanyDbContext>(connectionName: "DefaultConnection");
-builder.AddServiceDefaults();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 using (var scope = app.Services.CreateScope())
 {

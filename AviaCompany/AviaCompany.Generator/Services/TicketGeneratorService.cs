@@ -4,12 +4,22 @@ using Grpc.Core;
 
 namespace AviaCompany.Grpc.Services;
 
-public class TicketGeneratorService : TicketGenerator.TicketGeneratorBase
+/// <summary>
+/// gRPC сервис-генератор билетов.
+/// Генерирует случайные билеты на рейсы и отправляет их клиентам (API).
+/// Обеспечивает двустороннюю потоковую связь с подтверждением сохранения.
+/// </summary>
+public class TicketGeneratorService : TicketReceiver.TicketReceiverBase
 {
     private readonly ILogger<TicketGeneratorService> _logger;
     private readonly IConfiguration _configuration;
     private readonly Faker _faker;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр <see cref="TicketGeneratorService"/>.
+    /// </summary>
+    /// <param name="logger">Логгер для записи событий.</param>
+    /// <param name="configuration">Конфигурация приложения.</param>
     public TicketGeneratorService(ILogger<TicketGeneratorService> logger, IConfiguration configuration)
     {
         _logger = logger;
@@ -17,6 +27,15 @@ public class TicketGeneratorService : TicketGenerator.TicketGeneratorBase
         _faker = new Faker("ru");
     }
 
+    /// <summary>
+    /// Потоковая генерация билетов.
+    /// Клиент (API) подключается к сервису, генератор отправляет билеты в потоке,
+    /// клиент обрабатывает их и возвращает статусы обработки.
+    /// </summary>
+    /// <param name="requestStream">Поток для получения callback-сообщений от клиента.</param>
+    /// <param name="responseStream">Поток для отправки сгенерированных билетов клиенту.</param>
+    /// <param name="context">Контекст gRPC вызова.</param>
+    /// <returns>Задача, представляющая асинхронную операцию потоковой генерации.</returns>
     public override async Task StreamTickets(
         IAsyncStreamReader<TicketCallback> requestStream,
         IServerStreamWriter<TicketResponse> responseStream,
@@ -32,8 +51,10 @@ public class TicketGeneratorService : TicketGenerator.TicketGeneratorBase
             {
                 await foreach (var callback in requestStream.ReadAllAsync(context.CancellationToken))
                 {
-                    if (callback.Success) _logger.LogDebug("Клиент подтвердил сохранение");
-                    else _logger.LogWarning("Клиент сообщил об ошибке: {Error}", callback.Error);
+                    if (callback.Success) 
+                        _logger.LogDebug("Клиент подтвердил сохранение");
+                    else 
+                        _logger.LogWarning("Клиент сообщил об ошибке: {Error}", callback.Error);
                 }
             }
             catch (RpcException rpcEx) when (rpcEx.StatusCode == StatusCode.Cancelled)
@@ -51,7 +72,8 @@ public class TicketGeneratorService : TicketGenerator.TicketGeneratorBase
                     var ticket = GenerateRandomTicket();
                     generatedCount++;
 
-                    _logger.LogInformation("Генерация билета #{Count}: Рейс={FlightId}, Пассажир={PassengerId}, Место={Seat}",
+                    _logger.LogInformation(
+                        "Генерация билета #{Count}: Рейс={FlightId}, Пассажир={PassengerId}, Место={Seat}",
                         generatedCount, ticket.FlightId, ticket.PassengerId, ticket.SeatNumber);
 
                     await responseStream.WriteAsync(ticket, context.CancellationToken);
@@ -68,12 +90,16 @@ public class TicketGeneratorService : TicketGenerator.TicketGeneratorBase
         _logger.LogInformation("Сгенерировано билетов: {Count}", generatedCount);
     }
 
+    /// <summary>
+    /// Генерирует случайный билет с использованием библиотеки Bogus.
+    /// </summary>
+    /// <returns>Сгенерированный билет в формате gRPC-ответа.</returns>
     private TicketResponse GenerateRandomTicket()
     {
         return new TicketResponse
         {
-            FlightId = _faker.Random.Int(1, 100),
-            PassengerId = _faker.Random.Int(1, 1000),
+            FlightId = _faker.Random.Int(1, 10),      
+            PassengerId = _faker.Random.Int(1, 10),  
             SeatNumber = $"{_faker.Random.Int(1, 50)}{_faker.Random.Char('A', 'F')}",
             HasHandLuggage = _faker.Random.Bool(0.8f),
             BaggageWeight = _faker.Random.Bool(0.9f)

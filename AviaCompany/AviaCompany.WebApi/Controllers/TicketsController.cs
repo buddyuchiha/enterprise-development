@@ -14,6 +14,11 @@ public class TicketsController : CrudControllerBase<TicketDto, TicketCreateUpdat
     private readonly ITicketService _ticketService;
     private readonly ILogger<TicketsController> _logger;
 
+    /// <summary>
+    /// Конструктор контроллера билетов
+    /// </summary>
+    /// <param name="ticketService">Сервис для работы с билетами</param>
+    /// <param name="logger">Логгер для записи событий</param>
     public TicketsController(
         ITicketService ticketService,  // Изменяем на конкретный сервис
         ILogger<TicketsController> logger)

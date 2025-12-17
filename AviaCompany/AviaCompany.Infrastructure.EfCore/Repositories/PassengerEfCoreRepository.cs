@@ -18,7 +18,7 @@ public class PassengerEfCoreRepository : GenericEfCoreRepository<Passenger, int>
     public override async Task<Passenger?> Read(int entityId)
     {
         return await _dbSet
-            .Include(p => p.Tickets)
+            .Include(p => p.Tickets!)
             .ThenInclude(t => t.Flight)
             .FirstOrDefaultAsync(e => e.Id == entityId);
     }
@@ -29,7 +29,7 @@ public class PassengerEfCoreRepository : GenericEfCoreRepository<Passenger, int>
     public override async Task<IList<Passenger>> ReadAll()
     {
         return await _dbSet
-            .Include(p => p.Tickets)
+            .Include(p => p.Tickets!)
             .ThenInclude(t => t.Flight)
             .ToListAsync();
     }

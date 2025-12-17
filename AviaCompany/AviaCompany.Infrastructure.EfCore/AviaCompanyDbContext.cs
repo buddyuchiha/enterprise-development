@@ -23,27 +23,27 @@ public class AviaCompanyDbContext : DbContext
     /// <summary>
     /// Семейства самолетов
     /// </summary>
-    public DbSet<AircraftFamily> AircraftFamilies { get; set; }
+    public DbSet<AircraftFamily> AircraftFamilies { get; set; } = null!;
 
     /// <summary>
     /// Модели самолетов
     /// </summary>
-    public DbSet<AircraftModel> AircraftModels { get; set; }
+    public DbSet<AircraftModel> AircraftModels { get; set; } = null!;
 
     /// <summary>
     /// Авиарейсы
     /// </summary>
-    public DbSet<Flight> Flights { get; set; }
+    public DbSet<Flight> Flights { get; set; } = null!;
 
     /// <summary>
     /// Пассажиры
     /// </summary>
-    public DbSet<Passenger> Passengers { get; set; }
+    public DbSet<Passenger> Passengers { get; set; } = null!;
 
     /// <summary>
     /// Билеты
     /// </summary>
-    public DbSet<Ticket> Tickets { get; set; }
+    public DbSet<Ticket> Tickets { get; set; } = null!;
 
     /// <summary>
     /// Конфигурация модели данных
@@ -54,7 +54,11 @@ public class AviaCompanyDbContext : DbContext
 
         foreach (var entity in modelBuilder.Model.GetEntityTypes())
         {
-            entity.SetTableName(ToSnakeCase(entity.GetTableName()));
+            var tableName = entity.GetTableName();
+            if (!string.IsNullOrEmpty(tableName))
+            {
+                entity.SetTableName(ToSnakeCase(tableName));
+            }
 
             foreach (var property in entity.GetProperties())
             {
@@ -63,18 +67,27 @@ public class AviaCompanyDbContext : DbContext
 
             foreach (var foreignKey in entity.GetForeignKeys())
             {
-                var tableName = ToSnakeCase(entity.GetTableName());
-                var principalTableName = ToSnakeCase(foreignKey.PrincipalEntityType.GetTableName());
-                var columnName = ToSnakeCase(foreignKey.Properties.First().Name);
+                var entityTableName = entity.GetTableName() ?? string.Empty;
+                var principalTableName = foreignKey.PrincipalEntityType.GetTableName() ?? string.Empty;
+                var columnName = foreignKey.Properties.FirstOrDefault()?.Name ?? string.Empty;
 
-                foreignKey.SetConstraintName($"fk_{tableName}_{columnName}_{principalTableName}");
+                if (!string.IsNullOrEmpty(entityTableName) &&
+                    !string.IsNullOrEmpty(principalTableName) &&
+                    !string.IsNullOrEmpty(columnName))
+                {
+                    foreignKey.SetConstraintName($"fk_{ToSnakeCase(entityTableName)}_{ToSnakeCase(columnName)}_{ToSnakeCase(principalTableName)}");
+                }
             }
 
             foreach (var index in entity.GetIndexes())
             {
-                var tableName = ToSnakeCase(entity.GetTableName());
+                var indexTableName = entity.GetTableName() ?? string.Empty; 
                 var columns = string.Join("_", index.Properties.Select(p => ToSnakeCase(p.Name)));
-                index.SetDatabaseName($"ix_{tableName}_{columns}");
+
+                if (!string.IsNullOrEmpty(indexTableName))
+                {
+                    index.SetDatabaseName($"ix_{ToSnakeCase(indexTableName)}_{columns}");
+                }
             }
         }
 
@@ -173,10 +186,10 @@ public class AviaCompanyDbContext : DbContext
         modelBuilder.Entity<Ticket>().HasData(seeder.Tickets);
     }
 
-    private static string ToSnakeCase(string input)
+    private static string ToSnakeCase(string? input)
     {
         if (string.IsNullOrEmpty(input))
-            return input;
+            return string.Empty;
 
         var result = new StringBuilder();
         result.Append(char.ToLower(input[0]));

@@ -17,6 +17,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\AviaCompany.GrpcContracts\AviaCompany.GrpcContracts.csproj" />
 		<ProjectReference Include="..\AviaCompany.ServiceDefaults\AviaCompany.ServiceDefaults.csproj" />
-		<ProjectReference Include="..\AviaCompany.WebApi\AviaCompany.WebApi.csproj" />
 	</ItemGroup>
 </Project>

@@ -15,6 +15,6 @@ message TicketCallback {
     string error = 2;
 }
 
-service TicketGenerator {
+service TicketReceiver {
     rpc StreamTickets (stream TicketCallback) returns (stream TicketResponse);
 }

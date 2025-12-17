@@ -15,6 +15,11 @@ public class AircraftModelsController : CrudControllerBase<AircraftModelDto, Air
     private readonly IAircraftModelService _aircraftModelService;
     private readonly ILogger<AircraftModelsController> _logger;
 
+    /// <summary>
+    /// Конструктор контроллера моделей самолетов
+    /// </summary>
+    /// <param name="aircraftModelService">Сервис для работы с моделями самолетов</param>
+    /// <param name="logger">Логгер для записи событий</param>
     public AircraftModelsController(
         IAircraftModelService aircraftModelService, 
         ILogger<AircraftModelsController> logger)

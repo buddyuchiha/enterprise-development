@@ -12,6 +12,6 @@ public record TicketCreateUpdateDto(
     int FlightId,
     int PassengerId,
     string? SeatNumber,
-    bool? HasHandLuggage,
+    bool HasHandLuggage,
     decimal? LuggageWeight
 );
