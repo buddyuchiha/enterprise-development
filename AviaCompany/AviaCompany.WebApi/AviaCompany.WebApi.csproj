@@ -24,4 +24,16 @@
     <ProjectReference Include="..\AviaCompany.ServiceDefaults\AviaCompany.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	<ProjectReference Include="..\AviaCompany.GrpcContracts\AviaCompany.GrpcContracts.csproj" />
+	<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
+	<PackageReference Include="Grpc.Tools" Version="2.71.0">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+  </ItemGroup>
+
+<ItemGroup>
+	<Protobuf Include="..\AviaCompany.GrpcContracts\Protos\ticket.proto" GrpcServices="Client" />
+</ItemGroup>
 </Project>

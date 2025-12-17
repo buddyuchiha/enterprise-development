@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.AppHost", "Avia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.ServiceDefaults", "AviaCompany.ServiceDefaults\AviaCompany.ServiceDefaults.csproj", "{6909352E-A210-4DC9-9778-9A60C462F2F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Generator", "AviaCompany.Generator\AviaCompany.Generator.csproj", "{719C4F57-49B1-8AE3-20C7-DA9DAB8F163C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.Grpc", "AviaCompany.Generator\AviaCompany.Grpc.csproj", "{719C4F57-49B1-8AE3-20C7-DA9DAB8F163C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaCompany.GrpcContracts", "AviaCompany.GrpcContracts\AviaCompany.GrpcContracts.csproj", "{DC2CAB9D-73B8-4D1B-A386-53928CDD596D}"
 EndProject

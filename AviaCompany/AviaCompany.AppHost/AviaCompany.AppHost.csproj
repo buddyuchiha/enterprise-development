@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AviaCompany.Generator\AviaCompany.Generator.csproj" />
+    <ProjectReference Include="..\AviaCompany.Generator\AviaCompany.Grpc.csproj" />
     <ProjectReference Include="..\AviaCompany.WebApi\AviaCompany.WebApi.csproj" />
   </ItemGroup>
 
