@@ -9,23 +9,14 @@ namespace AviaCompany.Grpc.Services;
 /// Генерирует случайные билеты на рейсы и отправляет их клиентам (API).
 /// Обеспечивает двустороннюю потоковую связь с подтверждением сохранения.
 /// </summary>
-public class TicketGeneratorService : TicketReceiver.TicketReceiverBase
+public class TicketGeneratorService(
+    ILogger<TicketGeneratorService> logger,
+    IConfiguration configuration)
+    : TicketReceiver.TicketReceiverBase
 {
-    private readonly ILogger<TicketGeneratorService> _logger;
-    private readonly IConfiguration _configuration;
-    private readonly Faker _faker;
-
-    /// <summary>
-    /// Инициализирует новый экземпляр <see cref="TicketGeneratorService"/>.
-    /// </summary>
-    /// <param name="logger">Логгер для записи событий.</param>
-    /// <param name="configuration">Конфигурация приложения.</param>
-    public TicketGeneratorService(ILogger<TicketGeneratorService> logger, IConfiguration configuration)
-    {
-        _logger = logger;
-        _configuration = configuration;
-        _faker = new Faker("ru");
-    }
+    private readonly ILogger<TicketGeneratorService> _logger = logger;
+    private readonly IConfiguration _configuration = configuration;
+    private readonly Faker _faker = new();
 
     /// <summary>
     /// Потоковая генерация билетов.
@@ -51,9 +42,9 @@ public class TicketGeneratorService : TicketReceiver.TicketReceiverBase
             {
                 await foreach (var callback in requestStream.ReadAllAsync(context.CancellationToken))
                 {
-                    if (callback.Success) 
+                    if (callback.Success)
                         _logger.LogDebug("Клиент подтвердил сохранение");
-                    else 
+                    else
                         _logger.LogWarning("Клиент сообщил об ошибке: {Error}", callback.Error);
                 }
             }
@@ -98,8 +89,8 @@ public class TicketGeneratorService : TicketReceiver.TicketReceiverBase
     {
         return new TicketResponse
         {
-            FlightId = _faker.Random.Int(1, 10),      
-            PassengerId = _faker.Random.Int(1, 10),  
+            FlightId = _faker.Random.Int(1, 10),
+            PassengerId = _faker.Random.Int(1, 10),
             SeatNumber = $"{_faker.Random.Int(1, 50)}{_faker.Random.Char('A', 'F')}",
             HasHandLuggage = _faker.Random.Bool(0.8f),
             BaggageWeight = _faker.Random.Bool(0.9f)

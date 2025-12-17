@@ -14,6 +14,7 @@ using AviaCompany.Domain.Models.Tickets;
 using AviaCompany.Infrastructure.EfCore;
 using AviaCompany.Infrastructure.EfCore.Repositories;
 using AviaCompany.ServiceDefaults;
+using AviaCompany.WebApi.GrpcMappings;
 using AviaCompany.WebApi.GrpcServices;
 using Microsoft.EntityFrameworkCore;
 
@@ -52,6 +53,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile(new AviaCompanyProfile());
+    cfg.AddProfile(new TicketGrpcMapper());
 });
 
 builder.Services.AddScoped<IFlightService, FlightService>();
@@ -59,12 +61,6 @@ builder.Services.AddScoped<IPassengerService, PassengerService>();
 builder.Services.AddScoped<IAircraftFamilyService, AircraftFamilyService>();
 builder.Services.AddScoped<IAircraftModelService, AircraftModelService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
-
-builder.Services.AddScoped<IApplicationService<FlightDto, FlightCreateUpdateDto, int>, FlightService>();
-builder.Services.AddScoped<IApplicationService<PassengerDto, PassengerCreateUpdateDto, int>, PassengerService>();
-builder.Services.AddScoped<IApplicationService<TicketDto, TicketCreateUpdateDto, int>, TicketService>();
-builder.Services.AddScoped<IApplicationService<AircraftFamilyDto, AircraftFamilyCreateUpdateDto, int>, AircraftFamilyService>();
-builder.Services.AddScoped<IApplicationService<AircraftModelDto, AircraftModelCreateUpdateDto, int>, AircraftModelService>();
 
 builder.Services.AddScoped<IRepository<Flight, int>, FlightEfCoreRepository>();
 builder.Services.AddScoped<IRepository<AircraftFamily, int>, AircraftFamilyEfCoreRepository>();

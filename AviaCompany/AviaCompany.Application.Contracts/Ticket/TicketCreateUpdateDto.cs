@@ -13,5 +13,7 @@ public record TicketCreateUpdateDto(
     int PassengerId,
     string? SeatNumber,
     bool HasHandLuggage,
-    decimal? LuggageWeight
-);
+    decimal? LuggageWeight)
+{
+    public TicketCreateUpdateDto() : this(default, default, "", default, default) { }
+}; 

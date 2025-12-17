@@ -14,7 +14,8 @@ namespace AviaCompany.WebApi.GrpcServices;
 public class TicketConsumerService(
     IServiceScopeFactory scopeFactory,
     ILogger<TicketConsumerService> logger,
-    IConfiguration config) : BackgroundService
+    IConfiguration config,
+    IMapper mapper) : BackgroundService
 {
     private readonly string _generatorUrl = config["Generator:Address"]
                                             ?? "http://localhost:5001";
@@ -59,13 +60,7 @@ public class TicketConsumerService(
                     using var scope = scopeFactory.CreateScope();
                     var ticketService = scope.ServiceProvider.GetRequiredService<ITicketService>();
 
-                    var createDto = new TicketCreateUpdateDto(
-                        FlightId: ticketResponse.FlightId,
-                        PassengerId: ticketResponse.PassengerId,
-                        SeatNumber: ticketResponse.SeatNumber,
-                        HasHandLuggage: ticketResponse.HasHandLuggage,
-                        LuggageWeight: (decimal?)ticketResponse.BaggageWeight
-                    );
+                    var createDto = mapper.Map<TicketCreateUpdateDto>(ticketResponse);
 
                     await ticketService.Create(createDto);
                     success = true;
